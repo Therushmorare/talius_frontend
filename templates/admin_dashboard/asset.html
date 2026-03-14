@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Assets</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="flex h-screen bg-gray-100 font-sans">
+
+<!-- Sidebar -->
+<aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
+  <!-- Logo / Brand -->
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">
+    Talius
+  </div>
+
+  <!-- Divider -->
+  <div class="border-b border-gray-700 mb-4"></div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-600"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-users"></i><span>Users</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-dollar-sign"></i><span>Depreciation</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-trash"></i><span>Disposals</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+
+  <!-- Optional Footer / Quick Actions -->
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="ml-64 flex-1 flex flex-col p-6 overflow-y-auto">
+
+    <!-- Navbar -->
+    <header class="flex justify-between items-center mb-8 bg-white/80 backdrop-blur-md shadow-md rounded-xl px-6 py-4">
+    <!-- Page Title -->
+    <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+
+    <!-- Right Side -->
+    <div class="flex items-center gap-4 relative">
+
+        <!-- Notifications -->
+        <div class="relative group">
+        <button class="relative text-gray-600 hover:text-gray-900 p-2 rounded-full transition">
+            <i class="fas fa-bell text-xl"></i>
+            <span class="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+        </button>
+
+        <!-- Dropdown -->
+        <div class="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-50">
+            <div class="p-4 text-gray-700 font-semibold border-b border-gray-200">Notifications</div>
+            <ul class="divide-y divide-gray-200 max-h-64 overflow-y-auto">
+            <li class="px-4 py-3 hover:bg-gray-50 cursor-pointer flex justify-between items-center">
+                <span>Asset AS001 is due</span>
+                <span class="text-xs text-gray-400">2h ago</span>
+            </li>
+            <li class="px-4 py-3 hover:bg-gray-50 cursor-pointer flex justify-between items-center">
+                <span>New user registered</span>
+                <span class="text-xs text-gray-400">1d ago</span>
+            </li>
+            </ul>
+        </div>
+        </div>
+
+        <!-- User Menu -->
+        <div class="relative group">
+        <button class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold hover:shadow-lg transition">
+            JD
+        </button>
+
+        <!-- Dropdown -->
+        <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-50">
+            <ul class="py-2 text-gray-700">
+            <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2">
+                <i class="fas fa-user-circle"></i> Profile
+            </li>
+            <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2">
+                <i class="fas fa-cog"></i> Settings
+            </li>
+            <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </li>
+            </ul>
+        </div>
+        </div>
+
+    </div>
+    </header>
+
+    <!-- KPI Cards with Icons -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mb-6">
+    <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex items-center gap-4">
+        <div class="bg-indigo-100 text-indigo-500 w-12 h-12 flex items-center justify-center rounded-lg text-xl">
+        <i class="fas fa-box"></i>
+        </div>
+        <div>
+        <h3 class="text-gray-500 font-medium text-sm">Total Assets</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-1">150</p>
+        </div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex items-center gap-4">
+        <div class="bg-yellow-100 text-yellow-500 w-12 h-12 flex items-center justify-center rounded-lg text-xl">
+        <i class="fas fa-calendar-check"></i>
+        </div>
+        <div>
+        <h3 class="text-gray-500 font-medium text-sm">Due This Period</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-1">25</p>
+        </div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex items-center gap-4">
+        <div class="bg-red-100 text-red-500 w-12 h-12 flex items-center justify-center rounded-lg text-xl">
+        <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div>
+        <h3 class="text-gray-500 font-medium text-sm">Overdue</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-1">10</p>
+        </div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex items-center gap-4">
+        <div class="bg-green-100 text-green-500 w-12 h-12 flex items-center justify-center rounded-lg text-xl">
+        <i class="fas fa-check-circle"></i>
+        </div>
+        <div>
+        <h3 class="text-gray-500 font-medium text-sm">Verified This Period</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-1">30</p>
+        </div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex items-center gap-4">
+        <div class="bg-orange-100 text-orange-500 w-12 h-12 flex items-center justify-center rounded-lg text-xl">
+        <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div>
+        <h3 class="text-gray-500 font-medium text-sm">Open Exceptions</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-1">5</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Filters + Add Asset -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+
+    <!-- Filters + Add Asset -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-3 bg-white rounded-2xl shadow-inner p-4">
+
+        <!-- Asset ID -->
+        <div class="relative flex items-center gap-2">
+        <i class="fas fa-hashtag text-gray-400"></i>
+        <input type="text" placeholder="Asset ID" class="px-3 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-sm transition w-32">
+        </div>
+
+        <!-- Department -->
+        <div class="relative flex items-center gap-2">
+        <i class="fas fa-building text-gray-400"></i>
+        <input type="text" placeholder="Department" class="px-3 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-sm transition w-32">
+        </div>
+
+        <!-- Custodian -->
+        <div class="relative flex items-center gap-2">
+        <i class="fas fa-user text-gray-400"></i>
+        <input type="text" placeholder="Custodian" class="px-3 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-sm transition w-32">
+        </div>
+
+        <!-- Date -->
+        <div class="relative flex items-center gap-2">
+        <i class="fas fa-calendar-alt text-gray-400"></i>
+        <input type="date" class="px-3 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-sm transition w-36">
+        </div>
+
+        <!-- Status -->
+        <div class="relative flex items-center gap-2">
+        <i class="fas fa-info-circle text-gray-400"></i>
+        <select class="px-3 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:outline-none shadow-sm transition w-32">
+            <option>Status</option>
+            <option>Active</option>
+            <option>Due</option>
+            <option>Overdue</option>
+        </select>
+        </div>
+
+    </div>
+
+    <!-- Add Asset Button -->
+    <button onclick="openModal()" class="flex items-center gap-2 bg-indigo-500 text-white px-6 py-2 rounded-2xl shadow-md hover:bg-indigo-600 hover:scale-105 transition transform font-semibold">
+        <i class="fas fa-plus"></i> Add Asset
+    </button>
+
+    </div>
+
+    </div>
+
+    <!-- Assets Table -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 text-gray-800">
+        <thead class="bg-gray-50">
+        <tr>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Asset ID</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Name</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Category</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Department</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Location</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Custodian</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Next Due</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        <tr onclick="openAssetModal('AS001')" class="hover:bg-gray-50 hover:shadow-md transition-shadow cursor-pointer">
+            <td class="px-4 py-3 font-medium text-gray-700">AS001</td>
+            <td class="px-4 py-3 text-gray-600">Laptop</td>
+            <td class="px-4 py-3 text-gray-600">Electronics</td>
+            <td class="px-4 py-3 text-gray-600">IT</td>
+            <td class="px-4 py-3 text-gray-600">Johannesburg</td>
+            <td class="px-4 py-3 text-gray-600">John Doe</td>
+            <td class="px-4 py-3">
+                <span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-semibold">Active</span>
+            </td>
+            <td class="px-4 py-3 text-gray-600">2026-03-10</td>
+            <td class="px-4 py-3 flex gap-2">
+                <button onclick="openAssetModal('AS001'); event.stopPropagation();" class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition text-sm flex items-center gap-1">
+                    <i class="fas fa-eye text-xs"></i> View
+                </button>
+            </td>
+        </tr>
+
+        <!-- Example second row -->
+        <tr class="hover:bg-gray-50 hover:shadow-md transition-shadow">
+            <td class="px-4 py-3 font-medium text-gray-700">AS002</td>
+            <td class="px-4 py-3 text-gray-600">Projector</td>
+            <td class="px-4 py-3 text-gray-600">Electronics</td>
+            <td class="px-4 py-3 text-gray-600">Marketing</td>
+            <td class="px-4 py-3 text-gray-600">Cape Town</td>
+            <td class="px-4 py-3 text-gray-600">Jane Smith</td>
+            <td class="px-4 py-3">
+            <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-semibold">Due</span>
+            </td>
+            <td class="px-4 py-3 text-gray-600">2026-03-15</td>
+            <td class="px-4 py-3 flex gap-2">
+            <button class="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition text-sm flex items-center gap-1">
+                <i class="fas fa-eye text-xs"></i> View
+            </button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<!-- Add Asset Modal -->
+<!-- Add Asset Modal -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center z-50">
+  <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 w-96 shadow-2xl transform scale-90 opacity-0 transition-all duration-300 ease-out relative" id="modalContent">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-plus-circle text-indigo-500 text-2xl"></i>
+        <h2 class="text-xl font-bold text-gray-800">Add Asset</h2>
+      </div>
+      <button onclick="closeModal()" class="text-gray-600 hover:text-gray-900 transition text-lg">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex flex-col gap-4">
+      <button class="w-full py-3 rounded-xl bg-indigo-500 text-white font-semibold shadow-md hover:shadow-lg hover:bg-indigo-600 transform hover:scale-105 transition">
+        Import
+      </button>
+      <button class="w-full py-3 rounded-xl bg-green-500 text-white font-semibold shadow-md hover:shadow-lg hover:bg-green-600 transform hover:scale-105 transition">
+        Add
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="assetModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-2xl w-[600px] p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+            <h2 id="assetModalTitle" class="text-xl font-bold">Asset Info</h2>
+            <button onclick="closeAssetModal()"><i class="fas fa-times text-gray-600"></i></button>
+        </div>
+        <div id="assetModalContent" class="space-y-4 text-gray-700 text-sm">
+            <!-- Asset info will be injected here -->
+        </div>
+        <div class="mt-6 flex justify-end gap-2">
+            <button onclick="editAsset()" class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 flex items-center gap-2">
+                <i class="fas fa-edit"></i> Edit
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal() {
+  const modal = document.getElementById('modal');
+  const content = document.getElementById('modalContent');
+  modal.classList.remove('hidden');
+  requestAnimationFrame(() => {
+    content.classList.remove('scale-90', 'opacity-0');
+    content.classList.add('scale-100', 'opacity-100');
+  });
+}
+
+function closeModal() {
+  const modal = document.getElementById('modal');
+  const content = document.getElementById('modalContent');
+  content.classList.add('scale-90', 'opacity-0');
+  setTimeout(() => modal.classList.add('hidden'), 200);
+}
+
+const assets = {
+    'AS001': {
+        id: 'AS001',
+        name: 'Laptop',
+        category: 'Electronics',
+        department: 'IT',
+        location: 'Johannesburg',
+        custodian: 'John Doe',
+        status: 'Active',
+        purchaseDate: '2026-03-10',
+        usefulLife: '5 years',
+        currentValue: '$1,200',
+        depreciationLedger: [
+            {date: '2026-03-10', action: 'Purchased', value: 1200},
+            {date: '2026-12-31', action: 'Depreciation', value: 960},
+        ]
+    }
+};
+
+function openAssetModal(assetId){
+    const modal = document.getElementById('assetModal');
+    const content = document.getElementById('assetModalContent');
+    const asset = assets[assetId];
+
+    document.getElementById('assetModalTitle').innerText = `Asset Info - ${assetId}`;
+
+    content.innerHTML = `
+        <p><strong>Name:</strong> ${asset.name}</p>
+        <p><strong>Category:</strong> ${asset.category}</p>
+        <p><strong>Department:</strong> ${asset.department}</p>
+        <p><strong>Location:</strong> ${asset.location}</p>
+        <p><strong>Custodian:</strong> ${asset.custodian}</p>
+        <p><strong>Status:</strong> ${asset.status}</p>
+        <p><strong>Purchase Date:</strong> ${asset.purchaseDate}</p>
+        <p><strong>Useful Life:</strong> ${asset.usefulLife}</p>
+        <p><strong>Current Value:</strong> ${asset.currentValue}</p>
+        <h3 class="mt-4 font-semibold">Depreciation Ledger:</h3>
+        <table class="min-w-full border text-left text-sm mt-2">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-4 py-2 border">Date</th>
+                    <th class="px-4 py-2 border">Action</th>
+                    <th class="px-4 py-2 border">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${asset.depreciationLedger.map(l=>`
+                    <tr>
+                        <td class="px-4 py-2 border">${l.date}</td>
+                        <td class="px-4 py-2 border">${l.action}</td>
+                        <td class="px-4 py-2 border">$${l.value}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeAssetModal(){
+    const modal = document.getElementById('assetModal');
+    modal.classList.add('hidden');
+}
+
+function editAsset(){
+    alert('Open edit asset form here');
+}
+
+function disposeAsset(){
+    if(confirm('Are you sure you want to dispose this asset?')){
+      window.open('disposal_request.html')        
+    }
+}
+</script>
+
+<style>
+@keyframes scale-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-scale-in { animation: scale-in 0.25s ease-out forwards; }
+</style>
+
+</body>
+</html>

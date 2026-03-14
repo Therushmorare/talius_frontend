@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Asset Disposal</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+<body class="flex h-screen bg-gray-100 font-sans">
+
+<!-- Sidebar -->
+<aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
+  <!-- Logo / Brand -->
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">
+    Talius
+  </div>
+
+  <!-- Divider -->
+  <div class="border-b border-gray-700 mb-4"></div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-users"></i><span>Users</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-dollar-sign"></i><span>Depreciation</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-600"><i class="fas fa-trash"></i><span>Disposals</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+
+  <!-- Optional Footer / Quick Actions -->
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="ml-64 flex-1 flex flex-col p-6 overflow-y-auto">
+
+<!-- Header -->
+<header class="flex justify-between items-center mb-6 bg-white shadow rounded-xl px-6 py-4">
+<h1 class="text-2xl font-bold text-gray-800">Asset Disposal Capture</h1>
+<button class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 flex items-center gap-2">
+<i class="fas fa-download"></i> Download Template
+</button>
+</header>
+
+<!-- Disposal Form -->
+<!-- Disposal Form - Modern Design -->
+<div class="bg-white rounded-3xl shadow-lg p-8 mb-8 max-w-4xl mx-auto">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Capture New Asset Disposal</h2>
+
+  <form id="disposalForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Manager ID -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Manager ID</label>
+      <div class="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
+        <span class="px-3 text-gray-500"><i class="fas fa-user"></i></span>
+        <input type="text" placeholder="Enter Manager ID" class="flex-1 p-3 focus:outline-none" required>
+      </div>
+    </div>
+
+    <!-- Asset ID -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Asset ID</label>
+      <div class="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
+        <span class="px-3 text-gray-500"><i class="fas fa-box"></i></span>
+        <input type="text" placeholder="Enter Asset ID" class="flex-1 p-3 focus:outline-none" required>
+      </div>
+    </div>
+
+    <!-- Disposal Reason -->
+    <div class="md:col-span-2 flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Reason for Disposal</label>
+      <textarea placeholder="Describe the reason..." class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" rows="4" required></textarea>
+    </div>
+
+    <!-- Proposed Method -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Proposed Disposal Method</label>
+      <select class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+        <option value="">Select Method</option>
+        <option value="sale">Sale</option>
+        <option value="write-off">Write-Off</option>
+        <option value="donation">Donation</option>
+        <option value="recycle">Recycle</option>
+      </select>
+    </div>
+
+    <!-- Date -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Disposal Date</label>
+      <input type="date" class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+    </div>
+
+    <!-- Proceeds -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Proceeds (if any)</label>
+      <input type="number" placeholder="Amount in USD" class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+    </div>
+
+    <!-- Supporting Docs -->
+    <div class="md:col-span-2 flex flex-col">
+      <label class="text-gray-600 font-medium mb-1">Supporting Documents</label>
+      <input type="file" class="border rounded-lg p-2 focus:outline-none" multiple>
+      <p class="text-xs text-gray-400 mt-1">You can upload multiple documents or images as proof.</p>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="md:col-span-2 flex justify-end">
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 flex items-center gap-2 shadow-md transition">
+        <i class="fas fa-save"></i> Submit Disposal
+      </button>
+    </div>
+
+  </form>
+</div>
+
+</div>
+
+</body>
+</html>

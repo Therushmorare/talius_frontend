@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Useful Life & Depreciation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="flex h-screen bg-gray-100 font-sans">
+
+<!-- Sidebar (reuse your sidebar from other pages) -->
+<aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
+  <!-- Logo / Brand -->
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">
+    Talius
+  </div>
+
+  <!-- Divider -->
+  <div class="border-b border-gray-700 mb-4"></div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-users"></i><span>Users</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-600"><i class="fas fa-dollar-sign"></i><span>Depreciation</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-trash"></i><span>Disposals</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+
+  <!-- Optional Footer / Quick Actions -->
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="ml-64 flex-1 p-6 overflow-y-auto">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Useful Life & Depreciation</h1>
+    <button class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 flex items-center gap-2">
+      <i class="fas fa-download"></i> Download
+    </button>
+  </header>
+
+  <!-- Department Tabs -->
+  <div class="flex gap-3 mb-6">
+    <button onclick="filterDept('Finance')" class="tab px-4 py-2 bg-gray-200 rounded-lg">Finance</button>
+    <button onclick="filterDept('Operations')" class="tab px-4 py-2 bg-gray-200 rounded-lg">Operations</button>
+    <button onclick="filterDept('IT')" class="tab px-4 py-2 bg-gray-200 rounded-lg">IT</button>
+    <button onclick="filterDept('all')" class="tab px-4 py-2 bg-gray-200 rounded-lg">All</button>
+  </div>
+
+  <!-- Asset Table -->
+  <div class="bg-white rounded-2xl shadow overflow-x-auto">
+    <table class="min-w-full">
+      <thead class="bg-gray-50 text-gray-600 text-sm">
+        <tr>
+          <th class="px-4 py-3 text-left">Asset ID</th>
+          <th class="px-4 py-3 text-left">Name</th>
+          <th class="px-4 py-3 text-left">Department</th>
+          <th class="px-4 py-3 text-left">Purchase Date</th>
+          <th class="px-4 py-3 text-left">Useful Life (yrs)</th>
+          <th class="px-4 py-3 text-left">Current Value</th>
+        </tr>
+      </thead>
+      <tbody id="assetTable" class="divide-y">
+        <tr data-dept="Finance" onclick="openDepreciationModal('AST001')">
+          <td class="px-4 py-3 font-semibold">AST001</td>
+          <td class="px-4 py-3">Laptop Dell XPS</td>
+          <td class="px-4 py-3">Finance</td>
+          <td class="px-4 py-3">2023-01-15</td>
+          <td class="px-4 py-3">5</td>
+          <td class="px-4 py-3">$1,200</td>
+        </tr>
+        <tr data-dept="Operations" onclick="openDepreciationModal('AST002')">
+          <td class="px-4 py-3 font-semibold">AST002</td>
+          <td class="px-4 py-3">Forklift Model A</td>
+          <td class="px-4 py-3">Operations</td>
+          <td class="px-4 py-3">2022-06-20</td>
+          <td class="px-4 py-3">10</td>
+          <td class="px-4 py-3">$15,000</td>
+        </tr>
+        <tr data-dept="IT" onclick="openDepreciationModal('AST003')">
+          <td class="px-4 py-3 font-semibold">AST003</td>
+          <td class="px-4 py-3">Server Rack HP</td>
+          <td class="px-4 py-3">IT</td>
+          <td class="px-4 py-3">2021-09-10</td>
+          <td class="px-4 py-3">8</td>
+          <td class="px-4 py-3">$8,500</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Depreciation Modal -->
+<div id="depreciationModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-2xl w-[700px] p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h2 id="assetTitle" class="text-xl font-bold">Asset Depreciation Ledger</h2>
+      <button onclick="closeDepreciationModal()"><i class="fas fa-times text-gray-600"></i></button>
+    </div>
+
+    <div id="ledgerContent" class="space-y-3 text-gray-700 text-sm">
+      <!-- Ledger content will be injected via JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+  // Filter by department
+  function filterDept(dept){
+    let rows = document.querySelectorAll("#assetTable tr");
+    rows.forEach(row=>{
+      if(dept==='all'){ row.style.display=''; return; }
+      row.dataset.dept===dept ? row.style.display='' : row.style.display='none';
+    });
+  }
+
+  // Open modal with asset depreciation
+  function openDepreciationModal(assetId){
+    const modal = document.getElementById('depreciationModal');
+    const title = document.getElementById('assetTitle');
+    const content = document.getElementById('ledgerContent');
+
+    // Example data for demo purposes
+    const ledgers = {
+      'AST001': [
+        {date:'2023-01-15', action:'Purchased', value:1200},
+        {date:'2023-12-31', action:'Depreciation', value:960},
+        {date:'2024-12-31', action:'Depreciation', value:720},
+      ],
+      'AST002': [
+        {date:'2022-06-20', action:'Purchased', value:15000},
+        {date:'2022-12-31', action:'Depreciation', value:13500},
+        {date:'2023-12-31', action:'Depreciation', value:12000},
+      ],
+      'AST003': [
+        {date:'2021-09-10', action:'Purchased', value:8500},
+        {date:'2022-12-31', action:'Depreciation', value:7200},
+        {date:'2023-12-31', action:'Depreciation', value:6000},
+      ]
+    };
+
+    title.innerText = `Asset Depreciation Ledger - ${assetId}`;
+    content.innerHTML = `
+      <table class="min-w-full border text-left">
+        <thead class="bg-gray-50 text-gray-600">
+          <tr>
+            <th class="px-4 py-2 border">Date</th>
+            <th class="px-4 py-2 border">Action</th>
+            <th class="px-4 py-2 border">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${ledgers[assetId].map(l=>`
+            <tr>
+              <td class="px-4 py-2 border">${l.date}</td>
+              <td class="px-4 py-2 border">${l.action}</td>
+              <td class="px-4 py-2 border">$${l.value}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeDepreciationModal(){
+    const modal = document.getElementById('depreciationModal');
+    modal.classList.add('hidden');
+  }
+</script>
+
+</body>
+</html>

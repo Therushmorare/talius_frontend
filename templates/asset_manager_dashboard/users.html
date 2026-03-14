@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Users</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body class="flex h-screen bg-gray-100 font-sans">
+
+<!-- Sidebar -->
+<aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
+  <!-- Logo / Brand -->
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">
+    Talius
+  </div>
+
+  <!-- Divider -->
+  <div class="border-b border-gray-700 mb-4"></div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-600"><i class="fas fa-users"></i><span>Users</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-dollar-sign"></i><span>Depreciation</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-trash"></i><span>Disposals</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+
+  <!-- Optional Footer / Quick Actions -->
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="ml-64 flex-1 p-6 overflow-y-auto">
+
+<!-- Header -->
+<header class="flex justify-between items-center mb-8 bg-white shadow rounded-xl px-6 py-4">
+
+<h1 class="text-3xl font-bold text-gray-800">
+Users
+</h1>
+
+<button onclick="openModal()" class="bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 flex items-center gap-2">
+<i class="fas fa-user-plus"></i>
+Add User
+</button>
+
+</header>
+
+<!-- ROLE TABS -->
+
+<div class="flex gap-3 mb-6">
+
+<button onclick="filterRole('Admin')" class="tab px-4 py-2 bg-gray-200 rounded-lg">
+Admin
+</button>
+
+<button onclick="filterRole('Asset Manager')" class="tab px-4 py-2 bg-gray-200 rounded-lg">
+Asset Manager
+</button>
+
+<button onclick="filterRole('Asset Controller')" class="tab px-4 py-2 bg-gray-200 rounded-lg">
+Asset Controller
+</button>
+
+<button onclick="filterRole('Custodian')" class="tab px-4 py-2 bg-gray-200 rounded-lg">
+Custodian
+</button>
+
+<button onclick="filterRole('all')" class="tab px-4 py-2 bg-gray-200 rounded-lg">
+All
+</button>
+
+</div>
+
+<!-- USERS TABLE -->
+
+<div class="bg-white rounded-2xl shadow overflow-x-auto">
+
+<table class="min-w-full">
+
+<thead class="bg-gray-50 text-gray-600 text-sm">
+
+<tr>
+
+<th class="px-4 py-3 text-left">User ID</th>
+<th class="px-4 py-3 text-left">Email</th>
+<th class="px-4 py-3 text-left">First Name</th>
+<th class="px-4 py-3 text-left">Last Name</th>
+<th class="px-4 py-3 text-left">Employee #</th>
+<th class="px-4 py-3 text-left">Department</th>
+<th class="px-4 py-3 text-left">Role</th>
+<th class="px-4 py-3 text-left">Phone</th>
+
+</tr>
+
+</thead>
+
+<tbody id="userTable" class="divide-y">
+
+<tr data-role="Admin" onclick="openUserModal(this)" class="cursor-pointer hover:bg-gray-50 transition">
+<td class="px-4 py-3 font-semibold">USR001</td>
+<td class="px-4 py-3">admin@talius.com</td>
+<td class="px-4 py-3">John</td>
+<td class="px-4 py-3">Doe</td>
+<td class="px-4 py-3">EMP1001</td>
+<td class="px-4 py-3">IT</td>
+<td class="px-4 py-3">Admin</td>
+<td class="px-4 py-3">+1 202 555 0123</td>
+</tr>
+
+<tr data-role="Asset Manager">
+<td class="px-4 py-3 font-semibold">USR002</td>
+<td class="px-4 py-3">manager@talius.com</td>
+<td class="px-4 py-3">Sarah</td>
+<td class="px-4 py-3">Chen</td>
+<td class="px-4 py-3">EMP1002</td>
+<td class="px-4 py-3">Finance</td>
+<td class="px-4 py-3">Asset Manager</td>
+<td class="px-4 py-3">+1 202 555 0145</td>
+</tr>
+
+<tr data-role="Asset Controller">
+<td class="px-4 py-3 font-semibold">USR003</td>
+<td class="px-4 py-3">controller@talius.com</td>
+<td class="px-4 py-3">James</td>
+<td class="px-4 py-3">Miller</td>
+<td class="px-4 py-3">EMP1003</td>
+<td class="px-4 py-3">Operations</td>
+<td class="px-4 py-3">Asset Controller</td>
+<td class="px-4 py-3">+1 202 555 0178</td>
+</tr>
+
+<tr data-role="Custodian">
+<td class="px-4 py-3 font-semibold">USR004</td>
+<td class="px-4 py-3">custodian@talius.com</td>
+<td class="px-4 py-3">Maria</td>
+<td class="px-4 py-3">Lopez</td>
+<td class="px-4 py-3">EMP1004</td>
+<td class="px-4 py-3">Warehouse</td>
+<td class="px-4 py-3">Custodian</td>
+<td class="px-4 py-3">+1 202 555 0189</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ADD USER MODAL -->
+
+<div id="modal" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
+
+<div class="bg-white rounded-2xl w-[500px] p-8 shadow-xl">
+
+<div class="flex justify-between mb-6">
+
+<h2 class="text-xl font-bold">
+Add User
+</h2>
+
+<button onclick="closeModal()">
+<i class="fas fa-times"></i>
+</button>
+
+</div>
+
+<form class="grid grid-cols-2 gap-4">
+
+<input placeholder="First Name" class="border p-2 rounded">
+<input placeholder="Last Name" class="border p-2 rounded">
+
+<input placeholder="Email" class="border p-2 rounded col-span-2">
+
+<input placeholder="Employee Number" class="border p-2 rounded">
+
+<input placeholder="Phone Number" class="border p-2 rounded">
+
+<input placeholder="Department" class="border p-2 rounded">
+
+<select class="border p-2 rounded">
+<option>Admin</option>
+<option>Asset Manager</option>
+<option>Asset Controller</option>
+<option>Custodian</option>
+</select>
+
+<button class="col-span-2 bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
+Create User
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- USER DETAILS MODAL -->
+
+<div id="userModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+
+<div class="bg-white rounded-2xl w-[600px] p-8 shadow-xl">
+
+<div class="flex justify-between mb-6">
+
+<h2 class="text-xl font-bold">
+User Details
+</h2>
+
+<button onclick="closeUserModal()">
+<i class="fas fa-times"></i>
+</button>
+
+</div>
+
+<form id="userForm" class="grid grid-cols-2 gap-4">
+
+<input id="uFirst" class="border p-2 rounded">
+<input id="uLast" class="border p-2 rounded">
+
+<input id="uEmail" class="border p-2 rounded col-span-2">
+
+<input id="uEmployee" class="border p-2 rounded">
+<input id="uPhone" class="border p-2 rounded">
+
+<input id="uDepartment" class="border p-2 rounded">
+
+<select id="uRole" class="border p-2 rounded">
+<option>Admin</option>
+<option>Asset Manager</option>
+<option>Asset Controller</option>
+<option>Custodian</option>
+</select>
+
+<select id="uStatus" class="border p-2 rounded">
+<option>Active</option>
+<option>Suspended</option>
+</select>
+
+</form>
+
+<div class="flex justify-between mt-6">
+
+<button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 flex items-center gap-2">
+
+<i class="fas fa-trash"></i>
+Delete User
+
+</button>
+
+<div class="flex gap-3">
+
+<button onclick="closeUserModal()" class="px-4 py-2 border rounded-lg">
+Cancel
+</button>
+
+<button class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">
+
+Update User
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openModal(){
+document.getElementById("modal").classList.remove("hidden")
+document.getElementById("modal").classList.add("flex")
+}
+
+function closeModal(){
+document.getElementById("modal").classList.add("hidden")
+}
+
+function filterRole(role){
+
+let rows = document.querySelectorAll("#userTable tr")
+
+rows.forEach(row=>{
+
+if(role === "all"){
+row.style.display = ""
+return
+}
+
+if(row.dataset.role === role)
+row.style.display = ""
+else
+row.style.display = "none"
+
+})
+
+}
+
+function openUserModal(row){
+
+let cells = row.children
+
+document.getElementById("uEmail").value = cells[1].innerText
+document.getElementById("uFirst").value = cells[2].innerText
+document.getElementById("uLast").value = cells[3].innerText
+document.getElementById("uEmployee").value = cells[4].innerText
+document.getElementById("uDepartment").value = cells[5].innerText
+document.getElementById("uRole").value = cells[6].innerText
+document.getElementById("uPhone").value = cells[7].innerText
+
+document.getElementById("userModal").classList.remove("hidden")
+document.getElementById("userModal").classList.add("flex")
+
+}
+
+function closeUserModal(){
+
+document.getElementById("userModal").classList.add("hidden")
+
+}
+</script>
+
+</body>
+</html>

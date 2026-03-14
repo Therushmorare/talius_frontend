@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Settings</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+
+<!-- Mobile Header -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">Talius</div>
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>Logout
+    </button>
+  </div>
+</aside>
+
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+<!-- Mobile Navbar -->
+<header class="flex justify-between items-center bg-white shadow-md px-4 py-3 md:hidden sticky top-0 z-30">
+  <button id="menuBtn" class="text-gray-700 text-2xl" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+  <h1 class="text-xl font-bold text-gray-800">Settings</h1>
+  <div class="flex items-center gap-2">
+    <button class="relative text-gray-600 hover:text-gray-900">
+      <i class="fas fa-bell text-xl"></i>
+      <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">AC</div>
+  </div>
+</header>
+
+<main class="flex-1 flex flex-col items-center p-4 md:ml-56 space-y-6">
+
+  <!-- Page Title -->
+  <div class="w-full max-w-4xl text-center md:text-left">
+    <h2 class="text-3xl font-bold text-gray-800">Settings</h2>
+    <p class="text-gray-600 mt-1">Manage your account, notifications, and preferences.</p>
+  </div>
+
+  <!-- Settings Container -->
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-6 space-y-8">
+
+    <!-- Profile Info -->
+    <section class="space-y-4">
+      <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Profile Information</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Full Name</label>
+          <input type="text" value="Asset Controller" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Email Address</label>
+          <input type="email" value="controller@talius.com" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-2 rounded-xl transition flex items-center gap-2">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </div>
+    </section>
+
+    <!-- Password Change -->
+    <section class="space-y-4">
+      <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Change Password</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Current Password</label>
+          <input type="password" placeholder="••••••••" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">New Password</label>
+          <input type="password" placeholder="••••••••" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 font-medium mb-1">Confirm New Password</label>
+          <input type="password" placeholder="••••••••" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-xl transition flex items-center gap-2">
+          <i class="fas fa-key"></i> Update Password
+        </button>
+      </div>
+    </section>
+
+    <!-- Notifications -->
+    <section class="space-y-4">
+      <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Notifications</h3>
+      <div class="space-y-2">
+        <label class="flex items-center gap-3">
+          <input type="checkbox" checked class="w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500">
+          <span class="text-gray-700">Email Notifications</span>
+        </label>
+        <label class="flex items-center gap-3">
+          <input type="checkbox" class="w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500">
+          <span class="text-gray-700">SMS Notifications</span>
+        </label>
+        <label class="flex items-center gap-3">
+          <input type="checkbox" checked class="w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500">
+          <span class="text-gray-700">Push Notifications</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Theme Settings -->
+    <section class="space-y-4">
+      <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Appearance</h3>
+      <div class="flex items-center gap-4">
+        <span class="text-gray-700 font-medium">Theme:</span>
+        <button id="toggleTheme" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-indigo-100 transition">Toggle Light/Dark</button>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<script>
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+function toggleSidebar() {
+  sidebar.classList.toggle('-translate-x-full');
+  overlay.classList.toggle('hidden');
+}
+
+// Theme toggle (demo)
+document.getElementById('toggleTheme').addEventListener('click', () => {
+  document.body.classList.toggle('dark:bg-gray-900');
+  document.body.classList.toggle('bg-gray-50');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Verification</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+
+<!-- Header -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">Talius</div>
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>Logout
+    </button>
+  </div>
+</aside>
+
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+<!-- Mobile Navbar -->
+<header class="flex justify-between items-center bg-white shadow-md px-4 py-3 md:hidden sticky top-0 z-30">
+  <button id="menuBtn" class="text-gray-700 text-2xl" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+  <h1 class="text-xl font-bold text-gray-800">Asset Verification</h1>
+  <div class="flex items-center gap-2">
+    <button class="relative text-gray-600 hover:text-gray-900">
+      <i class="fas fa-bell text-xl"></i>
+      <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">AC</div>
+  </div>
+</header>
+
+<main class="flex-1 flex flex-col items-center p-4 space-y-6">
+
+  <!-- Asset Info -->
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-md p-5">
+    <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+      <i class="fas fa-laptop text-indigo-500"></i> Dell Latitude 5540 Laptop
+    </h2>
+    <p class="text-gray-500 mt-1">Asset ID: AST-10421</p>
+    <span class="inline-block mt-2 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">Role: Asset Controller</span>
+  </div>
+
+  <!-- Verification Form -->
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-md p-5 space-y-5">
+
+    <!-- Condition Assessment -->
+    <div class="space-y-4">
+    <label class="flex items-center gap-2 text-gray-800 font-semibold">
+        <i class="fas fa-check-circle text-indigo-500"></i> Condition Assessment
+    </label>
+
+    <!-- Condition Items -->
+    <div class="space-y-3">
+
+        <!-- Physical Condition -->
+        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+        <div class="flex justify-between items-center mb-2">
+            <span class="font-medium text-gray-700">Physical Condition</span>
+            <label class="flex items-center gap-1 text-gray-600 text-sm">
+            <input type="checkbox" class="w-4 h-4 accent-indigo-500"> Approval Required
+            </label>
+        </div>
+        <select class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Select Condition</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+            <option value="Broken">Broken</option>
+            <option value="Stolen">Stolen</option>
+            <option value="Missing">Missing</option>
+            <option value="Needs Repair">Needs Repair</option>
+        </select>
+        </div>
+
+    </div>
+    </div>
+    <!-- Photo Evidence -->
+    <div class="space-y-2">
+    <label class="flex items-center gap-2 text-gray-800 font-semibold">
+        <i class="fas fa-camera text-indigo-500"></i> Photo Evidence (Max 5 images)
+    </label>
+
+    <!-- Drag & Drop Area -->
+    <div id="dropArea" class="w-full border-2 border-dashed border-gray-300 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500 transition">
+        <p class="text-gray-500 text-center">Drag & drop images here or click to select</p>
+        <p class="text-gray-400 text-sm mt-1">Max 5 images</p>
+        <input type="file" accept="image/*" multiple id="photoEvidence" class="hidden">
+    </div>
+
+    <!-- Image Previews -->
+    <div id="photoPreview" class="flex flex-wrap gap-2 mt-2"></div>
+    </div>
+
+    <!-- GPS Location -->
+    <div class="space-y-2">
+      <label class="flex items-center gap-2 text-gray-800 font-semibold">
+        <i class="fas fa-map-marker-alt text-indigo-500"></i> GPS Location
+      </label>
+      <p class="text-gray-700">Captured ✓ — 40.7128° N, 74.0060° W</p>
+      <p class="text-gray-700"><strong>Current Location:</strong> Head Office / Tower A / 4F-012</p>
+    </div>
+
+    <!-- Custodian -->
+    <div class="space-y-2">
+      <label class="flex items-center gap-2 text-gray-800 font-semibold">
+        <i class="fas fa-user text-indigo-500"></i> Custodian
+      </label>
+      <p class="text-gray-700"><strong>Current:</strong> Sarah Chen</p>
+      <input type="text" placeholder="Notify new custodian" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+
+    <!-- Comments -->
+    <div class="space-y-2">
+      <label class="flex items-center gap-2 text-gray-800 font-semibold">
+        <i class="fas fa-comment text-indigo-500"></i> Comments
+      </label>
+      <textarea placeholder="Add comments..." rows="4" class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-3 mt-4">
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
+        <i class="fas fa-play"></i> Submit Verification
+      </button>
+      <button class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    function toggleSidebar() {
+    sidebar.classList.toggle('-translate-x-full');
+    overlay.classList.toggle('hidden');
+    }
+
+  const dropArea = document.getElementById('dropArea');
+  const photoInput = document.getElementById('photoEvidence');
+  const photoPreview = document.getElementById('photoPreview');
+  let images = [];
+
+  // Open file picker when drop area is clicked
+  dropArea.addEventListener('click', () => photoInput.click());
+
+  // Handle file selection
+  photoInput.addEventListener('change', e => handleFiles(e.target.files));
+
+  // Handle drag & drop
+  dropArea.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropArea.classList.add('border-indigo-500');
+  });
+
+  dropArea.addEventListener('dragleave', e => {
+    e.preventDefault();
+    dropArea.classList.remove('border-indigo-500');
+  });
+
+  dropArea.addEventListener('drop', e => {
+    e.preventDefault();
+    dropArea.classList.remove('border-indigo-500');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  function handleFiles(files) {
+    const selectedFiles = Array.from(files).slice(0, 5 - images.length);
+    selectedFiles.forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const imgWrapper = document.createElement('div');
+        imgWrapper.className = 'relative w-20 h-20 rounded-xl overflow-hidden border border-gray-300 shadow-sm';
+
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'w-full h-full object-cover';
+        imgWrapper.appendChild(img);
+
+        // Remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = '&times;';
+        removeBtn.className = 'absolute top-0 right-0 bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs hover:bg-red-600';
+        removeBtn.addEventListener('click', () => {
+          photoPreview.removeChild(imgWrapper);
+          images = images.filter(f => f !== file);
+        });
+        imgWrapper.appendChild(removeBtn);
+
+        photoPreview.appendChild(imgWrapper);
+        images.push(file);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+</script>
+</body>
+</html>

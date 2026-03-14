@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talius | Exceptions</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+
+<!-- Header -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">Talius</div>
+  <nav class="flex-1 px-2 space-y-2">
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-box"></i><span>Assets</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
+    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-cog"></i><span>Settings</span></a>
+  </nav>
+  <div class="px-6 py-4 border-t border-gray-700">
+    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+      <i class="fas fa-sign-out-alt"></i>Logout
+    </button>
+  </div>
+</aside>
+
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+<!-- Mobile Navbar -->
+<header class="flex justify-between items-center bg-white shadow-md px-4 py-3 md:hidden sticky top-0 z-30">
+  <button id="menuBtn" class="text-gray-700 text-2xl" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+  <h1 class="text-xl font-bold text-gray-800">Exceptions</h1>
+  <div class="flex items-center gap-2">
+    <button class="relative text-gray-600 hover:text-gray-900">
+      <i class="fas fa-bell text-xl"></i>
+      <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">AC</div>
+  </div>
+</header>
+
+<main class="flex-1 flex flex-col items-center p-6 space-y-6">
+
+  <!-- Exceptions Grid -->
+  <div class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <!-- Card Example -->
+    <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition flex flex-col overflow-hidden min-h-[420px]">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between p-6 bg-indigo-50">
+        <div class="flex items-center gap-4">
+          <i class="fas fa-laptop text-indigo-500 text-3xl"></i>
+          <div>
+            <h2 class="text-xl font-bold text-gray-800">Dell Latitude 5540</h2>
+            <p class="text-sm text-gray-500">AST-10421</p>
+          </div>
+        </div>
+        <span class="px-4 py-2 text-sm font-semibold rounded-full bg-red-100 text-red-600">Pending</span>
+      </div>
+
+      <!-- Body -->
+      <div class="p-6 flex-1 flex flex-col justify-between space-y-4 text-gray-700 text-base">
+        <p><strong>Issue:</strong> Stolen / Missing</p>
+        <p><strong>Custodian:</strong> Sarah Chen</p>
+        <p><strong>Location:</strong> Head Office / Tower A / 4F-012</p>
+        <p><strong>Date Reported:</strong> 2026-03-12</p>
+      </div>
+
+      <!-- Action Buttons -->
+       <div class="p-6 flex flex-col sm:flex-row gap-3 border-t border-gray-100">
+        <button onclick="window.open('asset_verification.html')" class="flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl font-semibold text-base transition">
+            <i class="fas fa-check"></i> Resolve
+        </button>
+        </div>
+    </div>
+
+    <!-- Another Card -->
+    <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition flex flex-col overflow-hidden min-h-[420px]">
+      <div class="flex items-center justify-between p-6 bg-yellow-50">
+        <div class="flex items-center gap-4">
+          <i class="fas fa-desktop text-yellow-500 text-3xl"></i>
+          <div>
+            <h2 class="text-xl font-bold text-gray-800">HP EliteDesk 800</h2>
+            <p class="text-sm text-gray-500">AST-10567</p>
+          </div>
+        </div>
+        <span class="px-4 py-2 text-sm font-semibold rounded-full bg-yellow-100 text-yellow-600">In Review</span>
+      </div>
+      <div class="p-6 flex-1 flex flex-col justify-between space-y-4 text-gray-700 text-base">
+        <p><strong>Issue:</strong> Broken Screen</p>
+        <p><strong>Custodian:</strong> John Doe</p>
+        <p><strong>Location:</strong> Head Office / Tower B / 3F-021</p>
+        <p><strong>Date Reported:</strong> 2026-03-10</p>
+      </div>
+      <div class="p-6 flex flex-col sm:flex-row gap-3 border-t border-gray-100">
+        <button class="flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl font-semibold text-base transition">
+            <i class="fas fa-check"></i> Resolve
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+function toggleSidebar() {
+  sidebar.classList.toggle('-translate-x-full');
+  overlay.classList.toggle('hidden');
+}
+</script>
+</body>
+</html>
