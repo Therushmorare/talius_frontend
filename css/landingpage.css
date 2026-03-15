@@ -1,0 +1,30 @@
+body{
+background:#0f172a;
+color:white;
+font-family:system-ui;
+scroll-behavior:smooth;
+}
+
+.hero-gradient{
+background: radial-gradient(circle at top,#1e3a8a,#020617);
+}
+
+.feature-card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-6px);
+border-color:#3b82f6;
+}
+
+.section-divider{
+border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.login-modal{
+display:none;
+}

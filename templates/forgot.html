@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Talius | Reset Password</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white">
+
+<div class="w-full max-w-md">
+
+<div class="text-center mb-8">
+
+<i class="fa-solid fa-cubes text-blue-500 text-4xl mb-3"></i>
+<h1 class="text-2xl font-bold">Talius</h1>
+<p class="text-gray-400 text-sm">Reset your password</p>
+
+</div>
+
+<div class="card rounded-xl p-8">
+
+<form action="/forgot-password" method="POST" class="space-y-5">
+
+<div>
+
+<label class="text-sm text-gray-300">Email Address</label>
+
+<input
+type="email"
+required
+name="email"
+class="input w-full mt-2 p-3 rounded"
+placeholder="email@company.com">
+
+</div>
+
+<button class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold">
+
+Send Verification Code
+
+</button>
+
+</form>
+
+</div>
+
+<div class="text-center mt-6 text-sm text-gray-500">
+© 2026 Talius
+</div>
+
+</div>
+
+</body>
+</html>

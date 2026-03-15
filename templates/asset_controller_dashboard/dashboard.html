@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talius | Asset Controller Dashboard</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 font-sans">
+{% extends "asset_controller_base.html" %}
 
-<!-- Sidebar -->
-<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
-  <div class="px-6 py-8 text-2xl font-bold text-indigo-400 tracking-wider">Talius</div>
-  <nav class="flex-1 px-2 space-y-2">
-    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
-    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-box"></i><span>Assets</span></a>
-    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-exclamation-triangle"></i><span>Exceptions</span></a>
-    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition"><i class="fas fa-cog"></i><span>Settings</span></a>
-  </nav>
-  <div class="px-6 py-4 border-t border-gray-700">
-    <button class="w-full flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-      <i class="fas fa-sign-out-alt"></i>Logout
-    </button>
-  </div>
-</aside>
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
 
 <!-- Mobile overlay -->
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
@@ -136,57 +115,7 @@
 
 </div>
 
-<!-- Scripts -->
-<script>
-// Sidebar toggle
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebarOverlay');
-function toggleSidebar() {
-  sidebar.classList.toggle('-translate-x-full');
-  overlay.classList.toggle('hidden');
-}
+<script src="/js/mobile-nav.js"></script>
+<script src="/js/asset_modal.js"></script>
 
-// Asset modal functions
-function openAssetModal(id, name, dept, loc, next) {
-  document.getElementById('modalAssetID').textContent = id;
-  document.getElementById('modalAssetName').textContent = name;
-  document.getElementById('modalAssetDept').textContent = dept;
-  document.getElementById('modalAssetLoc').textContent = loc;
-  document.getElementById('modalAssetNext').textContent = next;
-  document.getElementById('assetModal').classList.remove('hidden');
-}
-function closeAssetModal() {
-  document.getElementById('assetModal').classList.add('hidden');
-}
-function verifyAsset() {
-  alert("Asset verified!");
-  closeAssetModal();
-}
-
-function showTab(tab) {
-    const verified = document.getElementById('verified');
-    const pending = document.getElementById('pending');
-    const tabVerifiedBtn = document.getElementById('tabVerified');
-    const tabPendingBtn = document.getElementById('tabPending');
-
-    if(tab === 'verified') {
-        verified.classList.remove('hidden');
-        pending.classList.add('hidden');
-        tabVerifiedBtn.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
-        tabVerifiedBtn.classList.remove('text-gray-600');
-        tabPendingBtn.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
-        tabPendingBtn.classList.add('text-gray-600');
-    } else {
-        verified.classList.add('hidden');
-        pending.classList.remove('hidden');
-        tabPendingBtn.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
-        tabPendingBtn.classList.remove('text-gray-600');
-        tabVerifiedBtn.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
-        tabVerifiedBtn.classList.add('text-gray-600');
-    }
-}
-
-</script>
-
-</body>
-</html>
+{% endblock %}

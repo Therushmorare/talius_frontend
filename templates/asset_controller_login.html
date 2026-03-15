@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Talius | Asset Controller Login</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white">
+
+<div class="w-full max-w-md">
+
+<!-- LOGO -->
+
+<div class="text-center mb-8">
+
+<i class="fa-solid fa-cubes text-blue-500 text-4xl mb-3"></i>
+
+<h1 class="text-2xl font-bold">Talius</h1>
+
+<p class="text-gray-400 text-sm">
+Asset Controller Portal
+</p>
+
+</div>
+
+
+<!-- LOGIN CARD -->
+
+<div class="login-card rounded-xl p-8">
+
+<form id="loginForm" action="/login/admin" method="POST" class="space-y-5">
+
+<!-- EMAIL -->
+
+<div>
+
+<label class="text-sm text-gray-300">Email Address</label>
+
+<input 
+type="email"
+name="email"
+required
+class="input-field w-full mt-2 p-3 rounded"
+placeholder="admin@company.com">
+
+<p class="text-red-400 text-sm hidden" id="emailError">
+Enter a valid email
+</p>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div>
+
+<label class="text-sm text-gray-300">Password</label>
+
+<div class="relative">
+
+<input
+type="password"
+name="password"
+required
+minlength="6"
+id="password"
+class="input-field w-full mt-2 p-3 rounded pr-10"
+placeholder="Enter password">
+
+<i 
+id="togglePassword"
+class="fa-solid fa-eye absolute right-3 top-5 cursor-pointer text-gray-400">
+</i>
+
+</div>
+
+<p class="text-red-400 text-sm hidden" id="passwordError">
+Password must be at least 6 characters
+</p>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="flex justify-between text-sm">
+
+<a href="/forgot-password" class="text-blue-400 hover:text-blue-300">
+Forgot password?
+</a>
+
+<a href="/" class="text-gray-400 hover:text-gray-200">
+Back
+</a>
+
+</div>
+
+
+<!-- LOGIN BUTTON -->
+
+<button 
+type="submit"
+class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold">
+
+Login
+
+</button>
+
+</form>
+
+</div>
+
+
+<div class="text-center mt-6 text-sm text-gray-500">
+© 2026 Talius
+</div>
+
+</div>
+
+<script>
+
+const password = document.getElementById("password")
+const toggle = document.getElementById("togglePassword")
+
+toggle.addEventListener("click", ()=>{
+
+const type = password.getAttribute("type") === "password" ? "text" : "password"
+password.setAttribute("type", type)
+
+toggle.classList.toggle("fa-eye")
+toggle.classList.toggle("fa-eye-slash")
+
+})
+
+
+/* Basic validation */
+
+const form = document.getElementById("loginForm")
+
+form.addEventListener("submit", function(e){
+
+let valid = true
+
+const email = form.email.value
+const passwordValue = form.password.value
+
+const emailError = document.getElementById("emailError")
+const passwordError = document.getElementById("passwordError")
+
+emailError.classList.add("hidden")
+passwordError.classList.add("hidden")
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+if(!emailPattern.test(email)){
+emailError.classList.remove("hidden")
+valid = false
+}
+
+if(passwordValue.length < 6){
+passwordError.classList.remove("hidden")
+valid = false
+}
+
+if(!valid){
+e.preventDefault()
+}
+
+})
+
+</script>
+
+</body>
+</html>
