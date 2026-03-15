@@ -62,7 +62,83 @@ def adminUsers():
 
 
 #asset controller pages
+@app.route('/controller/scanner', methods=['GE'])
+def assetScanner():
+    return render_template('/asset_controller_dashboard/asset_scanner.html')
 
+@app.route('/controller/assetVerification', methods=['GET'])
+def assetVerification():
+    return render_template('/asset_controller_dashboard/asset_verification.html')
+
+@app.route('/controller/assets', methods=['GET'])
+def controllerAssets():
+    return render_template('/asset_controller_dashboard/assets.html')
+
+@app.route('/controller/dashboard', methods=['GET'])
+def controllerDashboard():
+    return render_template('/asset_controller_dashboard/dashboard.html')
+
+@app.route('/controller/exceptions', methods=['GET'])
+def controllerException():
+    return render_template('/asset_controller_dashboard/exceptions.html')
+
+@app.route('/controller/settings', methods=['GET'])
+def controllerSettings():
+    return render_template('/asset_controller_dashboard/settings.html')
+
+@app.route('/controller/verificationProcess', methods=['GET'])
+def assetVerificationProcess():
+    return render_template('/asset_controller_dashboard/verification.html')
+
+#asset manager pages
+@app.route('/manager/dashboard', methods=['GET'])
+def managerDashboard():
+    return render_template('/asset_manager_dashboard/dashboard.html')
+
+@app.route('/manager/assets', methods=['GET'])
+def managerAssets():
+    return render_template('/asset_manager_dashboard/asset.html')
+
+@app.route('/manager/assetDisposal', methods=['GET'])
+def managerDisposal():
+    return render_template('/asset_manager_dashboard/disposal.html')
+
+@app.route('/manager/disposalRequest', methods=['GET'])
+def disposalRequest():
+    return render_template('/asset_manager_dashboard/disposal_request.html')
+
+@app.route('/manager/exceptions', methods=['GET'])
+def managerExceptions():
+    return render_template('/asset_manager_dashboard/exceptions.html')
+
+@app.route('/manager/reports', methods=['GET'])
+def managerReports():
+    return render_template('/asset_manager_dashboard/reports.html')
+
+@app.route('/manager/settings', methods=['GET'])
+def managerSettings():
+    return render_template('/asset_manager_dashboard/settings.html')
+
+@app.route('/manager/depreciationLedger', methods=['GET'])
+def managerDepreciationLedger():
+    return render_template('/asset_manager_dashboard/useful_life.html')
+
+#custodian pages
+@app.route('/custodian/dashboard', methods=['GET'])
+def custodianDashboard():
+    return render_template('/custodian_dashboard/asset.html')
+
+@app.route('/custodian/assets', methods=['GET'])
+def custodianAssets():
+    return render_template('/custodian/asset.html')
+
+@app.route('/custodian/reports', methods=['GET'])
+def custodianReports():
+    return render_template('/custodian_dashboard/reports.html')
+
+@app.route('/custodian/settings', methods=['GET'])
+def custodianSettings():
+    return render_template('/custodian_dashboard/settings.html')
 
 # Error handling example
 @app.errorhandler(404)
