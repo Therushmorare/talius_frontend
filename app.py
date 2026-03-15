@@ -74,7 +74,7 @@ def adminUsers():
 
 
 #asset controller pages
-@app.route('/controller/scanner', methods=['GE'])
+@app.route('/controller/scanner', methods=['GET'])
 def assetScanner():
     return render_template('/asset_controller_dashboard/asset_scanner.html')
 
