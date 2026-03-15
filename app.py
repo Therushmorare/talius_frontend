@@ -15,9 +15,21 @@ def home():
     return render_template('index.html')  # Make sure you have templates/index.html
 
 # Example API route
-@app.route('/login', methods=['GET'])
+@app.route('/admin/login', methods=['GET'])
 def login():
-    return render_template('login.html')
+    return render_template('admin_login.html')
+
+@app.route('/controller/login', methods=['GET'])
+def controllerLogin():
+    return render_template('asset_controller_login.html')
+
+@app.route('/manager/login', methods=['GET'])
+def managerLogin():
+    return render_template('asset_manager_login.html')
+
+@app.route('/custodian/login', methods=['GET'])
+def custodianLogin():
+    return render_template('custodian_login.html')
 
 @app.route('/ForgotPassword', methods=['GET'])
 def forgotPassword():
