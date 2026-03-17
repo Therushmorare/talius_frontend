@@ -113,9 +113,6 @@ document.getElementById("mfaForm").addEventListener("submit", async function(e){
       return;
     }
 
-    // Save new token
-    sessionStorage.setItem("access_token", data.access_token);
-
     // Redirect based on user_type
     if(user.user_type.toLowerCase() === "admin"){
       window.location.href = "/admin/dashboard";

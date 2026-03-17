@@ -1,0 +1,73 @@
+/* Modal Backdrop */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+/* Modal Box */
+.modal-component {
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Close button */
+.modal-close {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    color: #555;
+}
+.modal-close:hover { color: #000; }
+
+/* Body */
+.modal-body {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Actions */
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.modal-btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+.modal-btn-primary { background: #3b82f6; color:white; }
+.modal-btn-danger  { background: #ef4444; color:white; }
+.modal-btn-secondary { background: #e5e7eb; color:#111; }
+
+/* Modal Types */
+.modal-success { border-left: 4px solid #22c55e; }
+.modal-error   { border-left: 4px solid #ef4444; }
+.modal-warning { border-left: 4px solid #f59e0b; }
+.modal-info    { border-left: 4px solid #3b82f6; }
+
+/* Animations */
+@keyframes modalFadeIn { from {opacity:0; transform:scale(0.95);} to{opacity:1; transform:scale(1);} }
+@keyframes modalFadeOut{ from {opacity:1; transform:scale(1);} to{opacity:0; transform:scale(0.95);} }

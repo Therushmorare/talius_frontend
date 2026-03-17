@@ -3,256 +3,271 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<!-- Main Content -->
 <div class="ml-64 flex-1 flex flex-col p-6 overflow-y-auto">
 
-<!-- Navbar -->
+<!-- Navbar (Enhanced) -->
 <header class="flex justify-between items-center mb-8 bg-white/80 backdrop-blur-md shadow-md rounded-xl px-6 py-4">
-
-<h1 class="text-3xl font-bold text-gray-800">
-Dashboard
-</h1>
-
-<div class="flex items-center gap-4">
-
-<button class="relative text-gray-600 hover:text-gray-900">
-<i class="fas fa-bell text-xl"></i>
-<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-</button>
-
-<div class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-JD
-</div>
-
-</div>
-
+  <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+  <div class="flex items-center gap-4">
+    <button id="notifBell" class="relative text-gray-600 hover:text-gray-900 transition">
+    <i class="fas fa-bell text-xl"></i>
+    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <button 
+    id="profileBtn" 
+    class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold hover:scale-105 transition-transform focus:outline-none"
+    >
+        JD
+    </button>
+  </div>
 </header>
 
-<!-- KPI CARDS -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+<!-- KPI CARDS (Enhanced hover + dynamic badges) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
 
-<div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center">
-<div>
-<p class="text-gray-500 text-sm">Total Assets</p>
-<h3 class="text-2xl font-bold">1248</h3>
-</div>
-<div class="bg-indigo-100 p-3 rounded-xl text-indigo-600">
-<i class="fas fa-box text-xl"></i>
-</div>
+  <!-- Total Assets -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform">
+    <div>
+      <p class="text-gray-500 text-sm">Total Assets</p>
+      <h3 class="text-2xl font-bold">1248</h3>
+    </div>
+    <div class="bg-indigo-100 p-3 rounded-xl text-indigo-600">
+      <i class="fas fa-box text-xl"></i>
+    </div>
+  </div>
+
+  <!-- Due This Period -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform">
+    <div>
+      <p class="text-gray-500 text-sm">Due This Period</p>
+      <h3 class="text-2xl font-bold text-yellow-600">42</h3>
+    </div>
+    <div class="bg-yellow-100 p-3 rounded-xl text-yellow-600">
+      <i class="fas fa-clock"></i>
+    </div>
+  </div>
+
+  <!-- Overdue -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform">
+    <div>
+      <p class="text-gray-500 text-sm">Overdue</p>
+      <h3 class="text-2xl font-bold text-red-600">12</h3>
+    </div>
+    <div class="bg-red-100 p-3 rounded-xl text-red-600">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+  </div>
+
+  <!-- Verified -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform">
+    <div>
+      <p class="text-gray-500 text-sm">Verified</p>
+      <h3 class="text-2xl font-bold text-green-600">310</h3>
+    </div>
+    <div class="bg-green-100 p-3 rounded-xl text-green-600">
+      <i class="fas fa-check-circle"></i>
+    </div>
+  </div>
+
+  <!-- Exceptions -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform relative">
+    <div>
+      <p class="text-gray-500 text-sm">Exceptions</p>
+      <h3 class="text-2xl font-bold text-purple-600">7</h3>
+      <span class="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center animate-pulse">!</span>
+    </div>
+    <div class="bg-purple-100 p-3 rounded-xl text-purple-600">
+      <i class="fas fa-flag"></i>
+    </div>
+  </div>
+
+  <!-- Disposal Requests -->
+  <div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center hover:scale-105 transition-transform">
+    <div>
+      <p class="text-gray-500 text-sm">Disposal Requests</p>
+      <h3 class="text-2xl font-bold text-pink-600">15</h3>
+    </div>
+    <div class="bg-pink-100 p-3 rounded-xl text-pink-600">
+      <i class="fas fa-recycle"></i>
+    </div>
+  </div>
+
 </div>
 
-<div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center">
-<div>
-<p class="text-gray-500 text-sm">Due This Period</p>
-<h3 class="text-2xl font-bold text-yellow-600">42</h3>
-</div>
-<div class="bg-yellow-100 p-3 rounded-xl text-yellow-600">
-<i class="fas fa-clock"></i>
-</div>
-</div>
-
-<div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center">
-<div>
-<p class="text-gray-500 text-sm">Overdue</p>
-<h3 class="text-2xl font-bold text-red-600">12</h3>
-</div>
-<div class="bg-red-100 p-3 rounded-xl text-red-600">
-<i class="fas fa-exclamation-circle"></i>
-</div>
-</div>
-
-<div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center">
-<div>
-<p class="text-gray-500 text-sm">Verified</p>
-<h3 class="text-2xl font-bold text-green-600">310</h3>
-</div>
-<div class="bg-green-100 p-3 rounded-xl text-green-600">
-<i class="fas fa-check-circle"></i>
-</div>
-</div>
-
-<div class="bg-white p-5 rounded-2xl shadow flex justify-between items-center">
-<div>
-<p class="text-gray-500 text-sm">Exceptions</p>
-<h3 class="text-2xl font-bold text-purple-600">7</h3>
-</div>
-<div class="bg-purple-100 p-3 rounded-xl text-purple-600">
-<i class="fas fa-flag"></i>
-</div>
-</div>
-
-</div>
-
-<!-- ANALYTICS -->
+<!-- ANALYTICS (Enhanced tooltips & hover effects) -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+  <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-shadow">
+    <h3 class="text-lg font-semibold mb-4">Assets by Department</h3>
+    <canvas id="departmentChart"></canvas>
+  </div>
 
-<div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow">
+  <div class="bg-white p-6 rounded-2xl shadow flex flex-col items-center hover:shadow-lg transition-shadow">
+    <h3 class="text-lg font-semibold mb-4">Verification Progress</h3>
+    <canvas id="verificationChart" width="200" height="200"></canvas>
+    <p class="text-gray-500 text-sm mt-3">Assets verified this period</p>
+  </div>
+</div>
 
-<h3 class="text-lg font-semibold mb-4">
-Assets by Department
-</h3>
+<!-- NEW USERS & EXCEPTIONS CHART (Enhanced & Fixed) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
-<canvas id="departmentChart"></canvas>
+  <!-- Users List -->
+  <div class="bg-white rounded-2xl shadow-lg p-6">
+    <h3 class="text-lg font-semibold mb-4">Users</h3>
+    <div class="overflow-y-auto max-h-80">
+      <ul class="divide-y divide-gray-200">
+        
+        <!-- Example User -->
+        <li class="flex items-center justify-between py-3 hover:bg-gray-50 transition">
+          <div class="flex items-center gap-3">
+            <!-- Profile Initials -->
+            <div class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">JD</div>
+            <!-- Name and Role -->
+            <div>
+              <p class="font-medium text-gray-800">John Doe</p>
+              <p class="text-sm text-gray-500">Administrator</p>
+            </div>
+          </div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2">
+            <button class="px-3 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300 transition"><i class="fas fa-eye"></i></button>
+            <button class="px-3 py-1 bg-indigo-500 text-white rounded text-sm hover:bg-indigo-600 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </li>
+
+        <!-- Another Example User -->
+        <li class="flex items-center justify-between py-3 hover:bg-gray-50 transition">
+          <div class="flex items-center gap-3">
+            <div class="bg-green-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">MS</div>
+            <div>
+              <p class="font-medium text-gray-800">Mary Smith</p>
+              <p class="text-sm text-gray-500">Custodian</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300 transition"><i class="fas fa-eye"></i></button>
+            <button class="px-3 py-1 bg-indigo-500 text-white rounded text-sm hover:bg-indigo-600 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </li>
+
+        <!-- Dynamic Users from Flask -->
+        {% for user in users %}
+        <li class="flex items-center justify-between py-3 hover:bg-gray-50 transition">
+          <div class="flex items-center gap-3">
+            <div class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+              {{ user.first_name[0] }}{{ user.last_name[0] }}
+            </div>
+            <div>
+              <p class="font-medium text-gray-800">{{ user.first_name }} {{ user.last_name }}</p>
+              <p class="text-sm text-gray-500">{{ user.role }}</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300 transition"><i class="fas fa-eye"></i></button>
+            <button class="px-3 py-1 bg-indigo-500 text-white rounded text-sm hover:bg-indigo-600 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </li>
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Exceptions Chart -->
+  <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-shadow">
+    <h3 class="text-lg font-semibold mb-4">Exceptions Overview</h3>
+    <canvas id="exceptionsChart"></canvas>
+  </div>
 
 </div>
 
-<div class="bg-white p-6 rounded-2xl shadow flex flex-col items-center">
-
-<h3 class="text-lg font-semibold mb-4">
-Verification Progress
-</h3>
-
-<canvas id="verificationChart" width="200" height="200"></canvas>
-
-<p class="text-gray-500 text-sm mt-3">
-Assets verified this period
-</p>
-
-</div>
-
-</div>
-
-<!-- ADD ASSET BUTTON -->
-<div class="mb-6">
-<button onclick="openModal()" class="flex items-center gap-2 bg-indigo-500 text-white px-6 py-2 rounded-2xl shadow-md hover:bg-indigo-600 transition">
-<i class="fas fa-plus"></i>
-Add Asset
-</button>
-</div>
-
-<!-- TABLE -->
+<!-- TABLE (Enhanced hover + stripe) -->
 <div class="bg-white rounded-2xl shadow-lg overflow-x-auto">
-
-<table class="min-w-full divide-y divide-gray-200">
-
-<thead class="bg-gray-50">
-<tr>
-<th class="px-4 py-3 text-left text-sm font-semibold">Asset ID</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Department</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Custodian</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Next Due</th>
-<th class="px-4 py-3 text-left text-sm font-semibold">Actions</th>
-</tr>
-</thead>
-
-<tbody class="divide-y">
-
-<tr class="hover:bg-gray-50">
-<td class="px-4 py-3">AS001</td>
-<td class="px-4 py-3">Laptop</td>
-<td class="px-4 py-3">IT</td>
-<td class="px-4 py-3">John Doe</td>
-<td class="px-4 py-3">
-<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs">
-Active
-</span>
-</td>
-<td class="px-4 py-3">2026-03-10</td>
-<td class="px-4 py-3 flex gap-2">
-<button class="px-3 py-1 bg-indigo-500 text-white rounded text-sm">
-<i class="fas fa-eye"></i>
-</button>
-<button class="px-3 py-1 bg-gray-200 rounded text-sm">
-<i class="fas fa-edit"></i>
-</button>
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
-
-<div id="modalContent" class="bg-white p-8 rounded-3xl w-96 shadow-xl transform scale-90 opacity-0 transition">
-
-<div class="flex justify-between mb-6">
-<h2 class="text-xl font-bold">Add Asset</h2>
-<button onclick="closeModal()">
-<i class="fas fa-times"></i>
-</button>
-</div>
-
-<div class="space-y-4">
-
-<button class="w-full bg-indigo-500 text-white py-3 rounded-xl hover:bg-indigo-600">
-Import
-</button>
-
-<button class="w-full bg-green-500 text-white py-3 rounded-xl hover:bg-green-600">
-Add
-</button>
-
-</div>
-
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Asset ID</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Department</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Custodian</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Next Due</th>
+        <th class="px-4 py-3 text-left text-sm font-semibold">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y bg-gray-50">
+      <tr class="hover:bg-gray-100 transition-colors">
+        <td class="px-4 py-3">AS001</td>
+        <td class="px-4 py-3">Laptop</td>
+        <td class="px-4 py-3">IT</td>
+        <td class="px-4 py-3">John Doe</td>
+        <td class="px-4 py-3">
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs">Active</span>
+        </td>
+        <td class="px-4 py-3">2026-03-10</td>
+        <td class="px-4 py-3 flex gap-2">
+          <button class="px-3 py-1 bg-indigo-500 text-white rounded text-sm hover:bg-indigo-600 transition"> 
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="px-3 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300 transition">
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 </div>
 
 <script>
+/* Charts (preserved your original code) */
+new Chart(document.getElementById('departmentChart'), { type: 'bar', data: { labels: ['IT','Finance','Marketing','Operations','HR'], datasets: [{ data: [320,210,180,410,127], backgroundColor: ['#6366f1','#22c55e','#f59e0b','#8b5cf6','#06b6d4'] }] }, options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} } });
+new Chart(document.getElementById('verificationChart'), { type: 'doughnut', data: { datasets:[{ data:[310,938], backgroundColor:['#22c55e','#e5e7eb'], borderWidth:0 }] }, options: { cutout:'70%', plugins:{legend:{display:false}} } });
+new Chart(document.getElementById('usersChart'), { type: 'line', data: { labels: ['Week 1','Week 2','Week 3','Week 4'], datasets:[{ label:'New Users', data:[12,25,18,30], borderColor:'#6366f1', backgroundColor:'rgba(99,102,241,0.2)', fill:true }] }, options: { plugins:{legend:{display:true}} } });
+new Chart(document.getElementById('exceptionsChart'), { type:'pie', data: { labels:['Minor','Major','Critical'], datasets:[{ data:[3,2,2], backgroundColor:['#f59e0b','#ef4444','#8b5cf6'] }] }, options:{ plugins:{legend:{position:'bottom'}} } });
+</script>
 
-function openModal(){
-const modal = document.getElementById("modal")
-const content = document.getElementById("modalContent")
+<script>
+document.getElementById("notifBell").addEventListener("click", async () => {
+    try {
+        const res = await fetch("/api/notifications");
+        const data = await res.json();
 
-modal.classList.remove("hidden")
+        // Determine where the notifications array is
+        const notifications = data.notifications || data; // fallback if API returns an array directly
 
-setTimeout(()=>{
-content.classList.remove("scale-90","opacity-0")
-content.classList.add("scale-100","opacity-100")
-},10)
-}
+        if(!Array.isArray(notifications)) {
+            throw new Error("Notifications data is not an array");
+        }
 
-function closeModal(){
-const modal = document.getElementById("modal")
-const content = document.getElementById("modalContent")
+        notifications.forEach(notif => {
+            notify.show({
+                title: notif.title || "Notification",
+                message: notif.message || "",
+                type: notif.type || "info",
+                actions: [
+                    { label: "View", class: "modal-btn-primary", callback: () => console.log("View", notif.id) },
+                    { label: "Dismiss", class: "modal-btn-secondary" }
+                ],
+                autoClose: notif.autoClose || 5000
+            });
+        });
 
-content.classList.add("scale-90","opacity-0")
+    } catch(err) {
+        console.error("Failed to fetch notifications", err);
+        notify.show({
+            title: "Error",
+            message: "Could not load notifications.",
+            type: "error",
+            autoClose: 3000
+        });
+    }
+});
 
-setTimeout(()=>{
-modal.classList.add("hidden")
-},200)
-}
-
-/* Charts */
-
-new Chart(document.getElementById('departmentChart'),{
-type:'bar',
-data:{
-labels:['IT','Finance','Marketing','Operations','HR'],
-datasets:[{
-data:[320,210,180,410,127],
-backgroundColor:['#6366f1','#22c55e','#f59e0b','#8b5cf6','#06b6d4']
-}]
-},
-options:{
-plugins:{legend:{display:false}},
-scales:{y:{beginAtZero:true}}
-}
-})
-
-new Chart(document.getElementById('verificationChart'),{
-type:'doughnut',
-data:{
-datasets:[{
-data:[310,938],
-backgroundColor:['#22c55e','#e5e7eb'],
-borderWidth:0
-}]
-},
-options:{
-cutout:'70%',
-plugins:{legend:{display:false}}
-}
-})
-
+document.getElementById("profileBtn").addEventListener("click", () => {
+    window.open('/admin/settings');
+});
 </script>
 
 {% endblock %}
