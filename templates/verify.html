@@ -8,6 +8,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/static/css/login.css">
+<link rel="stylesheet" href="/static/css/alerts.css">
 </head>
 
 <body class="flex items-center justify-center min-h-screen text-white">
@@ -17,62 +18,106 @@
 <div class="text-center mb-8">
 
 <h1 class="text-2xl font-bold">Verification Code</h1>
-
-<p class="text-gray-400 text-sm">
-Enter the 6 digit code sent to your email
-</p>
+<p class="text-gray-400 text-sm">Enter the 6 digit code sent to your email</p>
 
 </div>
 
 <div class="card rounded-xl p-8 text-center">
 
-<form action="/verify-code" method="POST">
+<form id="verifyForm">
 
 <div class="flex justify-center gap-3 mb-6">
-
 <input class="code-input" maxlength="1">
 <input class="code-input" maxlength="1">
 <input class="code-input" maxlength="1">
 <input class="code-input" maxlength="1">
 <input class="code-input" maxlength="1">
 <input class="code-input" maxlength="1">
-
 </div>
 
-<button class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold">
-
+<button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold">
 Verify Code
-
 </button>
+
+<p id="formMessage" class="text-green-400 text-sm mt-2 hidden"></p>
+<p id="formError" class="text-red-400 text-sm mt-2 hidden"></p>
 
 </form>
 
-<p class="text-gray-400 text-sm mt-4">
-
-Didn't receive code?
-<a href="#" class="text-blue-400">Resend</a>
-
-</p>
-
 </div>
 
 </div>
+
+<script src="/static/js/alerts.js"></script>
 
 <script>
 
-const inputs = document.querySelectorAll(".code-input")
-
+// Autofocus logic
+const inputs = document.querySelectorAll(".code-input");
 inputs.forEach((input,index)=>{
+  input.addEventListener("input",()=>{
+    if(input.value.length === 1 && index < inputs.length - 1){
+      inputs[index+1].focus();
+    }
+  });
+});
 
-input.addEventListener("input",()=>{
-
-if(input.value.length === 1 && index < inputs.length - 1){
-inputs[index+1].focus()
+// Get temporary email from session
+const email = sessionStorage.getItem("reset_email");
+if(!email){
+  window.location.href = "/forgot-password"; // safety fallback
 }
 
-})
+// Handle verification
+const verifyForm = document.getElementById("verifyForm");
+const formMessage = document.getElementById("formMessage");
+const formError = document.getElementById("formError");
 
-})
+verifyForm.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  formMessage.classList.add("hidden");
+  formError.classList.add("hidden");
+
+  let token = "";
+  inputs.forEach(input => token += input.value);
+
+  if(token.length !== 6){
+    formError.textContent = "Enter complete 6-digit code";
+    formError.classList.remove("hidden");
+    return;
+  }
+
+  try{
+    const response = await fetch("/api/talius/verify-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        token: token
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      createAlert(data.message || "Invalid code", "info");
+      return;
+    }
+
+    createAlert("Code verified! Redirecting...");
+
+    // Store token temporarily to use on password reset page
+    sessionStorage.setItem("reset_token", token);
+
+    setTimeout(()=>{
+      window.location.href = "/";
+    }, 1500);
+
+  } catch(err){
+    createAlert("Server error. Try again", "error");
+    console.error(err);
+  }
+});
 
 </script>
 

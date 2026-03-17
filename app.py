@@ -35,6 +35,10 @@ def custodianLogin():
 def forgotPassword():
     return render_template('forgot.html')
 
+@app.route('/verifyPage', methods=['GET'])
+def verifyPage():
+    return render_template('verify.html')
+
 @app.route('/mfa', methods=['GET'])
 def mfaPage():
     return render_template('mfa.html')
