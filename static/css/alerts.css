@@ -1,0 +1,139 @@
+.alert-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    width: clamp(260px, 30vw, 380px);
+    pointer-events: none;
+}
+
+.alert-component {
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 16px;
+    border-radius: 12px;
+
+    backdrop-filter: blur(10px);
+
+    color: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15),
+        0 4px 10px rgba(0,0,0,0.08);
+
+    animation: alertSlideIn .35s ease;
+
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+.alert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.alert-message {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.alert-close {
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.alert-close:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
+.alert-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    transform-origin: left;
+    animation: alertTimer linear forwards;
+}
+
+
+.alert-success {
+    background: linear-gradient(135deg,#16a34a,#22c55e);
+    border-left: 4px solid #15803d;
+}
+
+.alert-error {
+    background: linear-gradient(135deg,#dc2626,#ef4444);
+    border-left: 4px solid #b91c1c;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg,#d97706,#f59e0b);
+    border-left: 4px solid #b45309;
+}
+
+.alert-info {
+    background: linear-gradient(135deg,#2563eb,#3b82f6);
+    border-left: 4px solid #1d4ed8;
+}
+
+
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes alertSlideOut {
+    to {
+        opacity: 0;
+        transform: translateX(40px) scale(.9);
+    }
+}
+
+.alert-hide {
+    animation: alertSlideOut .3s forwards;
+}
+
+
+/* progress bar animation */
+@keyframes alertTimer {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+}
+
+
+@media (max-width: 600px){
+
+    .alert-container{
+        left: 12px;
+        right: 12px;
+        width: auto;
+    }
+
+    .alert-component{
+        font-size: 13px;
+    }
+
+}
