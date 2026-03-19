@@ -76,6 +76,13 @@ def adminUsefulLife():
 def adminUsers():
     return render_template('/admin_dashboard/users.html')
 
+@app.route('/admin/asset/import', methods=['GET'])
+def adminAssetImport():
+    return render_template('/admin_dashboard/import_asset.html')
+
+@app.route('/admin/asset/add', methods=['GET'])
+def adminAssetAdd():
+    return render_template('/admin_dashboard/asset_adder.html')
 
 #asset controller pages
 @app.route('/controller/scanner', methods=['GET'])

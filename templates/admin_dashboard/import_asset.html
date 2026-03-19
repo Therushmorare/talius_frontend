@@ -1,0 +1,244 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Asset Import{% endblock %}
+
+{% block content %}
+
+<div class="ml-64 flex-1 flex flex-col p-6 overflow-y-auto">
+
+<!-- Navbar -->
+    <header class="flex justify-between items-center mb-8 bg-white/80 backdrop-blur-md shadow-md rounded-xl px-6 py-4">
+    <h1 class="text-3xl font-bold text-gray-800">Asset Importer</h1>
+    <div class="flex items-center gap-4">
+        <button id="notifBell" class="relative text-gray-600 hover:text-gray-900 transition">
+        <i class="fas fa-bell text-xl"></i>
+        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+        </button>
+        <button 
+        id="profileBtn" 
+        class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold hover:scale-105 transition-transform focus:outline-none"
+        >
+            JD
+        </button>
+    </div>
+    </header>
+
+<!-- MAIN CONTENT -->
+<div class="grid md:grid-cols-2 gap-6">
+
+<!-- LEFT: CSV GUIDE -->
+<div class="bg-white rounded-xl shadow-sm p-6">
+
+<h2 class="text-lg font-semibold text-gray-800 mb-4">CSV Format Guide</h2>
+
+<p class="text-sm text-gray-500 mb-4">
+Upload your assets using a CSV file. Ensure your file follows the structure below exactly.
+</p>
+
+<div class="bg-gray-100 rounded-lg p-4 text-sm text-gray-700 overflow-x-auto">
+
+<pre>
+asset_id,name,description,category,sub_category,department,custodian,location,acquisition_date,cost,residual_value,useful_life_years,depreciation_method
+AST-001,Laptop Dell XPS,Developer laptop,Electronics,Computers,IT,John Doe,Johannesburg,2024-01-10,25000,5000,5,Straight Line
+</pre>
+
+</div>
+
+<ul class="mt-4 text-sm text-gray-600 space-y-2">
+
+<li>• <strong>asset_id</strong> – Optional unique ID (auto-generated if empty)</li>
+<li>• <strong>name</strong> – Asset name</li>
+<li>• <strong>description</strong> – Required description</li>
+<li>• <strong>category</strong> – Main category</li>
+<li>• <strong>sub_category</strong> – Optional sub grouping</li>
+<li>• <strong>department</strong> – Owning department</li>
+<li>• <strong>custodian</strong> – Assigned user</li>
+<li>• <strong>location</strong> – Physical location</li>
+<li>• <strong>acquisition_date</strong> – Format: YYYY-MM-DD</li>
+<li>• <strong>cost</strong> – Purchase cost (decimal)</li>
+<li>• <strong>residual_value</strong> – Salvage value</li>
+<li>• <strong>useful_life_years</strong> – Asset lifespan</li>
+<li>• <strong>depreciation_method</strong> – e.g. Straight Line</li>
+
+</ul>
+
+</div>
+
+<!-- RIGHT: UPLOAD -->
+<div class="bg-white rounded-xl shadow-sm p-6">
+
+<h2 class="text-lg font-semibold text-gray-800 mb-4">Upload File</h2>
+
+<!-- LIMIT INFO -->
+<div class="mb-4 text-sm text-gray-600">
+<p>• Maximum file size: <strong>5MB</strong></p>
+<p>• Maximum assets per upload: <strong>1,000 records</strong></p>
+<p>• Accepted format: <strong>.csv only</strong></p>
+</div>
+
+<!-- UPLOAD BOX -->
+<form id="uploadForm" action="/assets/import" method="POST" enctype="multipart/form-data">
+
+<label 
+for="fileInput" 
+class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-8 cursor-pointer hover:border-indigo-500 transition text-center">
+
+<i class="fas fa-upload text-3xl text-gray-400 mb-3"></i>
+
+<p class="text-gray-600">
+Drag & drop your CSV file here or <span class="text-indigo-600 font-medium">browse</span>
+</p>
+
+<input id="fileInput" name="file" type="file" accept=".csv" class="hidden">
+
+</label>
+
+<!-- FILE NAME -->
+<p id="fileName" class="mt-3 text-sm text-gray-500 hidden"></p>
+
+<!-- ERROR -->
+<p id="fileError" class="mt-2 text-sm text-red-500 hidden"></p>
+
+<!-- SUBMIT -->
+<button 
+type="submit"
+class="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-medium transition">
+
+Upload Assets
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// FILE HANDLING
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const fileError = document.getElementById("fileError");
+
+fileInput.addEventListener("change", function(){
+
+const file = fileInput.files[0];
+
+fileError.classList.add("hidden");
+
+if(!file) return;
+
+// VALIDATE TYPE
+if(!file.name.endsWith(".csv")){
+fileError.textContent = "Only CSV files are allowed";
+fileError.classList.remove("hidden");
+fileInput.value = "";
+return;
+}
+
+// VALIDATE SIZE (5MB)
+if(file.size > 5 * 1024 * 1024){
+fileError.textContent = "File must be less than 5MB";
+fileError.classList.remove("hidden");
+fileInput.value = "";
+return;
+}
+
+// SHOW FILE NAME
+fileName.textContent = "Selected: " + file.name;
+fileName.classList.remove("hidden");
+
+});
+
+
+// DRAG & DROP
+const dropZone = document.querySelector("label[for='fileInput']");
+
+dropZone.addEventListener("dragover", (e)=>{
+e.preventDefault();
+dropZone.classList.add("border-indigo-500");
+});
+
+dropZone.addEventListener("dragleave", ()=>{
+dropZone.classList.remove("border-indigo-500");
+});
+
+dropZone.addEventListener("drop", (e)=>{
+e.preventDefault();
+dropZone.classList.remove("border-indigo-500");
+
+fileInput.files = e.dataTransfer.files;
+fileInput.dispatchEvent(new Event("change"));
+});
+
+document.getElementById("notifBell").addEventListener("click", async () => {
+    try {
+        const res = await fetch("/api/notifications");
+        const data = await res.json();
+
+        // Determine where the notifications array is
+        const notifications = data.notifications || data; // fallback if API returns an array directly
+
+        if(!Array.isArray(notifications)) {
+            throw new Error("Notifications data is not an array");
+        }
+
+        notifications.forEach(notif => {
+            notify.show({
+                title: notif.title || "Notification",
+                message: notif.message || "",
+                type: notif.type || "info",
+                actions: [
+                    { label: "View", class: "modal-btn-primary", callback: () => console.log("View", notif.id) },
+                    { label: "Dismiss", class: "modal-btn-secondary" }
+                ],
+                autoClose: notif.autoClose || 5000
+            });
+        });
+
+    } catch(err) {
+        console.error("Failed to fetch notifications", err);
+        notify.show({
+            title: "Error",
+            message: "Could not load notifications.",
+            type: "error",
+            autoClose: 3000
+        });
+    }
+});
+
+document.getElementById("profileBtn").addEventListener("click", () => {
+    window.open('/admin/settings');
+});
+
+function openModal(){
+  const modal = document.getElementById("modal");
+  const content = document.getElementById("modalContent");
+
+  modal.classList.remove("hidden");
+
+  setTimeout(()=>{
+    content.classList.remove("scale-90","opacity-0");
+    content.classList.add("scale-100","opacity-100");
+  },50);
+}
+
+function closeModal(){
+  const modal = document.getElementById("modal");
+  const content = document.getElementById("modalContent");
+
+  content.classList.remove("scale-100","opacity-100");
+  content.classList.add("scale-90","opacity-0");
+
+  setTimeout(()=>{
+    modal.classList.add("hidden");
+  },250);
+}
+
+</script>
+
+{% endblock %}

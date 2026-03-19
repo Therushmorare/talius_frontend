@@ -1,0 +1,324 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Asset Adder{% endblock %}
+
+{% block content %}
+
+<div class="ml-64 flex-1 flex flex-col p-6 overflow-y-auto space-y-6">
+
+<!-- HEADER -->
+<header class="flex justify-between items-center mb-8 bg-white/80 backdrop-blur-md shadow-md rounded-xl px-6 py-4">
+<h1 class="text-3xl font-bold text-gray-800">Add New Asset</h1>
+<div class="flex items-center gap-4">
+    <button id="notifBell" class="relative text-gray-600 hover:text-gray-900 transition">
+    <i class="fas fa-bell text-xl"></i>
+    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <button 
+    id="profileBtn" 
+    class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold hover:scale-105 transition-transform focus:outline-none"
+    >
+        JD
+    </button>
+</div>
+</header>
+
+<div class="flex justify-between items-center">
+  <div>
+    <p class="text-sm text-gray-500">Create and register a new asset in your system</p>
+  </div>
+
+  <div class="text-sm text-gray-500">
+    Asset ID will be auto-generated
+  </div>
+</div>
+
+<!-- FORM -->
+<form action="/assets/add" method="POST" class="space-y-6">
+
+<!-- GRID -->
+<div class="grid lg:grid-cols-3 gap-6">
+
+<!-- LEFT COLUMN -->
+<div class="lg:col-span-2 space-y-6">
+
+<!-- BASIC INFO -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+<h2 class="font-semibold text-gray-800">Basic Information</h2>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<div>
+<label class="text-sm text-gray-600">Asset Name</label>
+<input name="name" required class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Category</label>
+<input name="category" required class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Sub Category</label>
+<input name="sub_category" class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Department</label>
+<input name="department" required class="input">
+</div>
+
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Description</label>
+<textarea name="description" required class="input h-24"></textarea>
+</div>
+
+</div>
+
+<!-- ASSIGNMENT -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+<h2 class="font-semibold text-gray-800">Assignment</h2>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<div>
+  <label class="text-sm text-gray-600 mb-1 block">Custodian</label>
+
+  <div class="relative">
+    
+    <select name="custodian" required class="input appearance-none pr-10">
+      
+      <option value="">Select Custodian</option>
+
+      <!-- Temporary Static Users -->
+      <option value="john_doe">John Doe (IT Department)</option>
+      <option value="jane_smith">Jane Smith (Finance)</option>
+      <option value="mike_johnson">Mike Johnson (Operations)</option>
+      <option value="sarah_lee">Sarah Lee (HR)</option>
+
+    </select>
+
+    <!-- Dropdown Icon -->
+    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+      <i class="fas fa-chevron-down text-sm"></i>
+    </div>
+
+  </div>
+
+  <!-- Helper Text -->
+  <p class="text-xs text-gray-400 mt-1">
+    Select the user responsible for this asset
+  </p>
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Location</label>
+<input name="location" required class="input">
+</div>
+
+</div>
+
+</div>
+
+<!-- FINANCIAL -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+<h2 class="font-semibold text-gray-800">Financial Details</h2>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<div>
+<label class="text-sm text-gray-600">Acquisition Date</label>
+<input type="date" name="acquisition_date" required class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Cost</label>
+<input type="number" step="0.01" id="cost" name="cost" required class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Residual Value</label>
+<input type="number" step="0.01" id="residual" name="residual_value" required class="input">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Useful Life (Years)</label>
+<input type="number" id="life" name="useful_life_years" required class="input">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT COLUMN (SMART PANEL) -->
+<div class="space-y-6">
+
+<!-- DEPRECIATION -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+
+<h2 class="font-semibold text-gray-800">Depreciation</h2>
+
+<select name="depreciation_method" required class="input">
+<option value="">Select Method</option>
+<option value="Straight Line">Straight Line</option>
+<option value="Declining Balance">Declining Balance</option>
+<option value="Units of Production">Units of Production</option>
+</select>
+
+<div class="bg-gray-50 rounded-lg p-4 text-sm text-gray-600">
+<p class="font-medium text-gray-700 mb-1">Annual Depreciation</p>
+<p id="depreciationPreview">—</p>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-2 text-sm text-gray-600">
+
+<p><strong>Name:</strong> <span id="previewName">—</span></p>
+<p><strong>Category:</strong> <span id="previewCategory">—</span></p>
+<p><strong>Department:</strong> <span id="previewDept">—</span></p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- STICKY ACTION BAR -->
+<div class="sticky bottom-0 bg-white border-t p-4 flex justify-end gap-4 rounded-xl shadow-sm">
+
+<button type="reset" class="px-5 py-2 border rounded-lg text-gray-600 hover:bg-gray-100">
+Cancel
+</button>
+
+<button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+Add Asset
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- STYLES -->
+<style>
+.input{
+width:100%;
+border:1px solid #e5e7eb;
+padding:10px;
+border-radius:8px;
+outline:none;
+}
+.input:focus{
+border-color:#6366f1;
+box-shadow:0 0 0 2px rgba(99,102,241,0.2);
+}
+</style>
+
+<!-- SCRIPT -->
+<script>
+
+// LIVE PREVIEW
+const nameInput = document.querySelector("[name='name']");
+const categoryInput = document.querySelector("[name='category']");
+const deptInput = document.querySelector("[name='department']");
+
+nameInput.addEventListener("input",()=>previewName.textContent = nameInput.value || "—");
+categoryInput.addEventListener("input",()=>previewCategory.textContent = categoryInput.value || "—");
+deptInput.addEventListener("input",()=>previewDept.textContent = deptInput.value || "—");
+
+// DEPRECIATION CALC
+const cost = document.getElementById("cost");
+const residual = document.getElementById("residual");
+const life = document.getElementById("life");
+const preview = document.getElementById("depreciationPreview");
+
+function calc(){
+const c = parseFloat(cost.value);
+const r = parseFloat(residual.value);
+const l = parseFloat(life.value);
+
+if(c && r >= 0 && l){
+const dep = (c - r) / l;
+preview.textContent = "R " + dep.toFixed(2) + " / year";
+}else{
+preview.textContent = "—";
+}
+}
+
+[cost,residual,life].forEach(el=>el.addEventListener("input",calc));
+
+document.getElementById("notifBell").addEventListener("click", async () => {
+    try {
+        const res = await fetch("/api/notifications");
+        const data = await res.json();
+
+        // Determine where the notifications array is
+        const notifications = data.notifications || data; // fallback if API returns an array directly
+
+        if(!Array.isArray(notifications)) {
+            throw new Error("Notifications data is not an array");
+        }
+
+        notifications.forEach(notif => {
+            notify.show({
+                title: notif.title || "Notification",
+                message: notif.message || "",
+                type: notif.type || "info",
+                actions: [
+                    { label: "View", class: "modal-btn-primary", callback: () => console.log("View", notif.id) },
+                    { label: "Dismiss", class: "modal-btn-secondary" }
+                ],
+                autoClose: notif.autoClose || 5000
+            });
+        });
+
+    } catch(err) {
+        console.error("Failed to fetch notifications", err);
+        notify.show({
+            title: "Error",
+            message: "Could not load notifications.",
+            type: "error",
+            autoClose: 3000
+        });
+    }
+});
+
+document.getElementById("profileBtn").addEventListener("click", () => {
+    window.open('/admin/settings');
+});
+
+function openModal(){
+  const modal = document.getElementById("modal");
+  const content = document.getElementById("modalContent");
+
+  modal.classList.remove("hidden");
+
+  setTimeout(()=>{
+    content.classList.remove("scale-90","opacity-0");
+    content.classList.add("scale-100","opacity-100");
+  },50);
+}
+
+function closeModal(){
+  const modal = document.getElementById("modal");
+  const content = document.getElementById("modalContent");
+
+  content.classList.remove("scale-100","opacity-100");
+  content.classList.add("scale-90","opacity-0");
+
+  setTimeout(()=>{
+    modal.classList.add("hidden");
+  },250);
+}
+
+</script>
+
+{% endblock %}
